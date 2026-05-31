@@ -1,6 +1,7 @@
-from models.transacao import Transacao
+from models.despesa import Despesa
 from models.receita import Receita
 from database.conexao import criar_tabela
+from database.r
 
 criar_tabela()
 
