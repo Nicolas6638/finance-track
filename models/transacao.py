@@ -6,4 +6,4 @@ class Transacao:
         self.categoria = categoria
         
     def __str__(self):
-        return f"Data: [{self.data}] | Descrição{self.descricao} | Valor: R$ {self.valor} | Categoria : ({self.categoria})"
+        return f"Data: [{self.data}] | Descrição: {self.descricao} | Valor: R$ {self.valor} | Categoria : ({self.categoria})"
