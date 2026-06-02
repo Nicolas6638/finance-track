@@ -1,12 +1,17 @@
 from models.receita import Receita
 from models.despesa import Despesa
-from database.repositorio import salvar_transacao, listar_transacoes
+from database.repositorio import salvar_transacao, listar_transacoes, deletar_transacao
 
 class Carteira():
     
     def adicionar_transacao(self, transacao):
         salvar_transacao(transacao)
-            
+        
+    
+    def deletar(self, id):
+        deletar_transacao(id)
+        
+        print(f"🗑️ Transação {id} deletada com sucesso!")    
     
     def calcular_saldo(self):
         listar = listar_transacoes()
