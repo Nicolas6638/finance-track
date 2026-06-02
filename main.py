@@ -1,8 +1,10 @@
 from models.despesa import Despesa
 from models.receita import Receita
+from models.carteira import Carteira
 from database.conexao import criar_tabela
-from database.r
+from database.repositorio import salvar_transacao, listar_transacoes
 
-criar_tabela()
-
-print("Banco de dados criado com sucesso!")
+carteira = Carteira()
+carteira.adicionar_transacao(Despesa("PlaySatition Plus", 450, "1/06/2026", "Jogos"))
+carteira.listar()
+carteira.calcular_saldo()
