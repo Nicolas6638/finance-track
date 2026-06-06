@@ -1,16 +1,16 @@
 import sqlite3
 
+DB_PATH = 'gastos.db'
 
-def conexao():
-    conn = sqlite3.connect('gastos.db')
-    return conn
-    
+def get_conexao():
+    return sqlite3.connect(DB_PATH)
+        
     
 def criar_tabela():
-    conn = conexao()
-    cursor = conn.cursor()
+    with get_conexao() as conn:
+        cursor = conn.cursor()
     
-    cursor.execute('''
+        cursor.execute('''
     CREATE TABLE IF NOT EXISTS transacoes(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tipo TEXT,
@@ -21,5 +21,4 @@ def criar_tabela():
 )        
 ''')
     
-    conn.commit()
-    conn.close()
+        conn.commit()
