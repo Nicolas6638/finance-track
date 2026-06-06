@@ -13,11 +13,11 @@ def criar_tabela():
         cursor.execute('''
     CREATE TABLE IF NOT EXISTS transacoes(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    tipo TEXT,
-    descricao TEXT,
-    valor REAL,
-    categoria TEXT,
-    data TEXT
+    tipo TEXT NOT NULL,
+    descricao TEXT NOT NULL,
+    valor REAL NOT NULL,
+    categoria TEXT NOT NULL,
+    data TEXT NOT NULL
 )        
 ''')
     
