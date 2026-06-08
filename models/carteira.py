@@ -1,5 +1,4 @@
-from models.receita import Receita
-from models.despesa import Despesa
+from models.transacao import Transacao, TipoTransacao
 from database.repositorio import salvar_transacao, listar_transacoes, deletar_transacao,buscar_por_categoria, resumo_por_categoria,editar_transacao,buscar_por_mes
 import csv
 class Carteira():

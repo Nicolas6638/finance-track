@@ -35,7 +35,7 @@ def resumo_por_categoria():
         GROUP BY categoria
                    """).fetchall()
 
-def editar_transacao(id, descricao, valor, data, categoria):
+def editar_transacao(id, tipo,descricao, valor, data, categoria):
     with get_conexao() as conn:
         cursor = conn.cursor()
         cursor.execute("""
@@ -53,6 +53,6 @@ def buscar_por_mes(mes):
     
         return cursor.execute("""
         SELECT * FROM transacoes 
-        WHERE data LIKE ?          
-                   """, (f"%{mes}",)).fetchall()
+        WHERE substr(data, 4, 7) = ?          
+                   """, (mes,)).fetchall()
 

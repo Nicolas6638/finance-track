@@ -8,9 +8,7 @@ def get_conexao():
     
 def criar_tabela():
     with get_conexao() as conn:
-        cursor = conn.cursor()
-    
-        cursor.execute('''
+        conn.execute('''
     CREATE TABLE IF NOT EXISTS transacoes(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tipo TEXT NOT NULL,

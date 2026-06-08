@@ -1,11 +1,10 @@
-from models.despesa import Despesa
-from models.receita import Receita
 from models.carteira import Carteira
+from models.transacao import Transacao, TipoTransacao
 from database.conexao import criar_tabela
-from database.repositorio import salvar_transacao, listar_transacoes, buscar_por_categoria
-import time
+
 
 carteira = Carteira()
+
 
 def menu():
     print("""
@@ -26,7 +25,7 @@ def menu():
 ==========================      
           
           """)
-    
+
 while True:
     menu()
     
@@ -39,7 +38,7 @@ while True:
             valor = float(input("Valor: "))
             data = input("Data (DD/MM/AAAA): ")
             categoria = input("Categoria: ")
-            carteira.adicionar_transacao(Receita(descricao=descricao, valor=valor, data=data, categoria=categoria))
+            carteira.adicionar_transacao(Transacao(TipoTransacao.RECEITA,descricao=descricao, valor=valor, data=data, categoria=categoria))
             print("✅ Receita adicionada!")
         
         case 2:
@@ -47,7 +46,7 @@ while True:
             valor = float(input("Valor: "))
             data = input("Data (DD/MM/AAAA): ")
             categoria = input("Categoria: ")
-            carteira.adicionar_transacao(Despesa(descricao=descricao, valor=valor, data=data, categoria=categoria))
+            carteira.adicionar_transacao(Transacao(TipoTransacao.DESPESA, descricao=descricao, valor=valor, data=data, categoria=categoria))
             print("✅ Receita adicionada!")
             
         case 3:
@@ -88,10 +87,8 @@ while True:
         
         case 10:
             carteira.exportar_csv()
-            
-            time.sleep(1.5)
             print("📁 Relatório exportado com sucesso: relatorio.csv")
-            time.sleep(0.5)
         case 0:
             print("Até logo! 👋")
             break
+        
