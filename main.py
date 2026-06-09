@@ -5,36 +5,9 @@ from database.conexao import criar_tabela
 
 carteira = Carteira()
 
-def formatar_transacao(t):
-    id_, tipo, descricao, valor, categoria, data = t
-    emoji = "✅" if tipo == "receita" else "❌"
-    return f"ID: {id_} | {emoji} {descricao} | R$ {valor:.2f} | {categoria} | {data}"
 
-def ler_float(mensagem):
-    while True:
-        try:
-            return float(input(mensagem).replace(",", "."))
-        except ValueError:
-            print("⚠️ Valor inválido ! Digite um número.")
-
-def ler_int(mensagem):           
-    while True:
-        try:
-            return int(input(mensagem))
-        except ValueError:
-            print("⚠️ Número inválido!")
-
-def opcao_listar():
-    transacao = carteira.listar()
-    
-    if not transacao:
-        print("Nenhuma transação encontrada.")
-        return
-    for t in transacao:
-        print(formatar_transacao(t))
- 
- 
-print("""
+def menu():
+    print("""
 ==========================
   💰 Organizador Financeiro
 ==========================
@@ -51,13 +24,12 @@ print("""
 0. Sair
 ==========================      
           
-          """) 
-        
-def main():
-    criar_tabela()
-while True:
+          """)
 
-    opcao  = ler_int("Escolha a opção: ")
+while True:
+    menu()
+    
+    opcao  = int(input("Escolha a opção: "))
     print()
     
     match opcao:
