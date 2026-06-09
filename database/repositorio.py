@@ -2,10 +2,9 @@ from database.conexao import get_conexao
 
 def salvar_transacao(transacao):
     with get_conexao() as conn:
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO transacoes (tipo, descricao, valor, categoria, data) VALUES (?, ?, ?, ?, ?)", (transacao.tipo, transacao.descricao, transacao.valor,transacao.categoria, transacao.data))
-
-        conn.commit()
+        conn.execute("INSERT INTO transacoes (tipo, descricao, valor, categoria, data) VALUES (?, ?, ?, ?, ?)",
+                     (transacao.tipo.value, transacao.descricao, transacao.valor,
+                      transacao.categoria, transacao.data))
             
 def listar_transacoes():
     with get_conexao() as conn: 
@@ -17,8 +16,8 @@ def deletar_transacao(id):
     with get_conexao() as conn:
         cursor = conn.cursor()
         cursor.execute("DELETE FROM transacoes WHERE id = ?", (id,))
-        
         conn.commit()
+        return cursor.rowcount > 0
    
 
 def buscar_por_categoria(categoria):
@@ -35,16 +34,13 @@ def resumo_por_categoria():
         GROUP BY categoria
                    """).fetchall()
 
-def editar_transacao(id, tipo,descricao, valor, data, categoria):
+def editar_transacao(id, tipo, descricao, valor, data, categoria):
     with get_conexao() as conn:
-        cursor = conn.cursor()
-        cursor.execute("""
+        conn.execute("""
         UPDATE transacoes
-        SET descricao = ?, valor = ?, data = ?, categoria =?
-        WHERE id = ?   
-                   """, (descricao, valor, data, categoria, id))
-    
-        conn.commit()
+        SET tipo = ?, descricao = ?, valor = ?, data = ?, categoria = ?
+        WHERE id = ?
+        """, (tipo, descricao, valor, data, categoria, id))
   
     
 def buscar_por_mes(mes):

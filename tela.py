@@ -1,7 +1,9 @@
+from database.conexao import criar_tabela
 from models.carteira import Carteira
 from models.transacao import Transacao, TipoTransacao
 import tkinter as tk
 
+criar_tabela()
 carteira = Carteira()
 
 janela = tk.Tk()

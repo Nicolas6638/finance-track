@@ -1,5 +1,6 @@
-from models.transacao import Transacao, TipoTransacao
-from database.repositorio import (salvar_transacao, listar_transacoes, deletar_transacao,buscar_por_categoria, resumo_por_categoria,editar_transacao,buscar_por_mes)
+from database.repositorio import (salvar_transacao, listar_transacoes, deletar_transacao,
+                                   buscar_por_categoria, resumo_por_categoria,
+                                   editar_transacao, buscar_por_mes)
 import csv
 
 class Carteira():
@@ -8,8 +9,8 @@ class Carteira():
         salvar_transacao(transacao)
         
     
-    def deletar(self, id_transacao: int):
-        deletar_transacao(id_transacao)
+    def deletar(self, id_transacao: int) -> bool:
+        return deletar_transacao(id_transacao)
            
     
     def calcular_saldo(self) -> float:
@@ -30,17 +31,15 @@ class Carteira():
     def resumo(self) -> list:
         return resumo_por_categoria()
         
-    def editar(self, id_transacao: int, descricao: str, valor: float, data: str, categoria: str):
-        editar_transacao(id_transacao, descricao, valor, data, categoria)
+    def editar(self, id_transacao: int, tipo: str, descricao: str, valor: float, data: str, categoria: str):
+        editar_transacao(id_transacao, tipo, descricao, valor, data, categoria)
            
     def filtrar_mes(self, mes: str) -> list:
         return buscar_por_mes(mes)
         
    
-    def exportar_csv(self, caminho= "relatorios.csv"):
-        
+    def exportar_csv(self, caminho="relatorio.csv"):
         with open(caminho, "w", newline="", encoding="utf-8") as arquivo:
             writer = csv.writer(arquivo)
             writer.writerow(["id", "tipo", "descricao", "valor", "categoria", "data"])
-            
-            writer.writerow(self.listar())
+            writer.writerows(self.listar())
