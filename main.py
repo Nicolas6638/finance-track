@@ -32,11 +32,9 @@ def opcao_listar():
         return
     for t in transacao:
         print(formatar_transacao(t))
-        
-def main():
-    criar_tabela()
-    while True:
-        print("""
+ 
+ 
+print("""
 ==========================
   💰 Organizador Financeiro
 ==========================
@@ -53,9 +51,12 @@ def main():
 0. Sair
 ==========================      
           
-          """)
+          """) 
+        
+def main():
+    criar_tabela()
+while True:
 
-    
     opcao  = ler_int("Escolha a opção: ")
     print()
     
