@@ -18,5 +18,15 @@ def criar_tabela():
     data TEXT NOT NULL
 )        
 ''')
+
+        conn.execute("""
+    CREATE TABLE IF NOT EXISTS orcamentos(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    categoria TEXT NOT NULL,
+    mes TEXT NOT NULL,
+    limite REAL NOT NULL,
+    UNIQUE(categoria, mes)
+    );             
+""")
     
         conn.commit()

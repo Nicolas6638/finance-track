@@ -187,5 +187,6 @@ class TestCarteira(unittest.TestCase):
             os.unlink(caminho)
 
 
+
 if __name__ == "__main__":
     unittest.main()
